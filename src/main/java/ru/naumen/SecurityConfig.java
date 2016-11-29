@@ -14,7 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("/css/**", "/login").permitAll()
+            .antMatchers("/css/**", "/login", "/signup").permitAll()
             .antMatchers("/**").hasRole("USER")
             .and()
             .formLogin()
@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
         auth.inMemoryAuthentication()
             .withUser("admin").password("admin").roles("USER");
     }

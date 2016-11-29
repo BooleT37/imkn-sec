@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import ru.naumen.entities.Course;
+import ru.naumen.entities.Professor;
 import ru.naumen.entities.Scholarship;
 import ru.naumen.entities.Student;
 import ru.naumen.model.CourseDao;
+import ru.naumen.model.ProfessorDao;
 import ru.naumen.model.ScholarshipDao;
 import ru.naumen.model.StudentDao;
 
@@ -23,6 +25,9 @@ public class RestServerApplication {
 
     @Inject
     private StudentDao _studentDao;
+
+    @Inject
+    private ProfessorDao _professorDao;
 
     @Inject
     private CourseDao _courseDao;

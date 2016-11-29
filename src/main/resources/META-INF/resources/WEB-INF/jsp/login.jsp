@@ -17,6 +17,11 @@
               Вы успешно вышли из системы.
           </div>
       </c:if>
+      <c:if test="${param.newUser != null}">
+           <div>
+               Пользователь ${newUser)} успешно создан. Используйте логин и пароль чтобы войти
+           </div>
+      </c:if>
    <form name='f' action="login" method='POST'>
       <table>
          <tr>
@@ -32,5 +37,7 @@
          </tr>
       </table>
   </form>
+  <br/>
+  Нет учетной записи? <a href="/signup">Зарегистрироваться</a>
 </body>
 </html>

@@ -10,7 +10,7 @@ import javax.inject.Named;
 import ru.naumen.entities.Professor;
 
 @Named
-public class InMemoryProfessorDaoImpl implements ProfessorDao {
+public class InMemoryProfessorDao implements ProfessorDao {
 
     private List<Professor> storage = new ArrayList<>();
     private AtomicInteger counter = new AtomicInteger(0);
