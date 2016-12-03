@@ -7,7 +7,7 @@
       <c:if test="${param.error != null}">
           <div>
               Ошибка аутентификации
-              <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+              <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}"><br/>
                 Причина: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
               </c:if>
           </div>
@@ -19,7 +19,7 @@
       </c:if>
       <c:if test="${param.newUser != null}">
            <div>
-               Пользователь ${newUser)} успешно создан. Используйте логин и пароль чтобы войти
+               Пользователь ${newUser} успешно создан. Используйте логин и пароль чтобы войти
            </div>
       </c:if>
    <form name='f' action="login" method='POST'>

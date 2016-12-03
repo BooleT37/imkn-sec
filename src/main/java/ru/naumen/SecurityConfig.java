@@ -1,14 +1,21 @@
 package ru.naumen;
 
-import javax.inject.Inject;
-
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import javax.inject.Inject;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	@Inject
+	private UserDetailsService userDetailsService;
+
+	@Inject
+	private AuthenticationProvider authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -23,9 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-            .withUser("admin").password("admin").roles("USER");
+        auth.authenticationProvider(authenticationProvider);
     }
 
 

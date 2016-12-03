@@ -1,21 +1,18 @@
 package ru.naumen.controllers;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.naumen.entities.Professor;
 import ru.naumen.model.ProfessorDao;
 import ru.naumen.model.StudentDao;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Objects;
 
 /**
@@ -32,9 +29,8 @@ public class HomeController {
 
     
     @GetMapping("/")
-    public String index(Model model) {
-
-        model.addAttribute("name", "Мир");
+    public String index(Model model, Principal principal) {
+        model.addAttribute("name", principal.getName());
         model.addAttribute("allStudents", storage.findAll());
         return "index";
     }
@@ -62,7 +58,7 @@ public class HomeController {
 
     @PostMapping("/signup")
 	public void signup(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String login = request.getParameter("login");
+    	String login = request.getParameter("username");
 		String password = request.getParameter("password");
 		if (!Objects.equals(password, request.getParameter("repeatPassword"))) {
 			response.sendRedirect("/signup?error=passwordsDiffer");
@@ -72,7 +68,7 @@ public class HomeController {
     	professor.setLogin(login);
     	professor.setPassword(password);
 		professorDao.save(professor);
-		response.sendRedirect("/login?newUser = " + professor.getLogin());
+		response.sendRedirect("/login?newUser=" + login);
 	}
 
 
